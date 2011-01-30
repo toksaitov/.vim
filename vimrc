@@ -1,3 +1,5 @@
+" Credits to +guns+ http://stackoverflow.com/questions/1636771/post-your-vim-config/1639391#1639391 "
+
 if version >= 700
 
     "------ Meta ------"
