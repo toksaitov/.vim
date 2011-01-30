@@ -136,4 +136,7 @@ if version >= 700
     " Forgot to sudo before editing a file
     cmap w!! w !sudo tee % >/dev/null
 
+    " Taglist toggle
+    nnoremap <silent> <F8> :TlistToggle<CR>
+
 endif " version >= 700
