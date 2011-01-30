@@ -137,6 +137,9 @@ if version >= 700
     cmap w!! w !sudo tee % >/dev/null
 
     " Taglist toggle
-    nnoremap <silent> <F8> :TlistToggle<CR>
+    command Tags TlistToggle
+
+    " NERDTree toggle
+    command Tree NERDTreeToggle
 
 endif " version >= 700
