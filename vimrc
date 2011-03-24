@@ -1,4 +1,5 @@
-" Credits to +guns+ http://stackoverflow.com/questions/1636771/post-your-vim-config/1639391#1639391 "
+" Credits goes to +guns+ 
+" http://stackoverflow.com/questions/1636771/post-your-vim-config/1639391#1639391
 
 if version >= 700
 
@@ -9,8 +10,9 @@ if version >= 700
         autocmd!
     endif
 
-    call pathogen#runtime_append_all_bundles() " now it's possible to unzip/untar/svn-checkout/git-clone plugins to their own 
-                                               "  private directory in .vim/bundle
+    " Now it's possible to unzip/untar/svn-checkout/git-clone plugins to their 
+    "  own private directories in .vim/bundle
+    call pathogen#runtime_append_all_bundles()
     call pathogen#helptags()
 
     set nocompatible                " break away from old vi compatibility
@@ -19,9 +21,10 @@ if version >= 700
 
     "------ Console UI & Text display ------"
 
-    set cmdheight=1                 " explicitly set the height of the command line
-    set showcmd                     " Show (partial) command in status line.
-    set number                      " yay line numbers
+    set cmdheight=1                 " explicitly set the height of the command 
+                                    "  line
+    set showcmd                     " show (partial) command in status line.
+    set number                      " show line numbers
     set ruler                       " show current position at bottom
     set noerrorbells                " don't whine
     set visualbell t_vb=            " and don't make faces
@@ -35,11 +38,12 @@ if version >= 700
     set wildmenu                    " turn on wild menu :e <Tab>
     set wildmode=list:longest       " set wildmenu to list choice
     set hidden                      " hides buffers instead of closing them
+    set spell spelllang=en_us       " turns on spell checking
 
     if has('syntax')
         syntax on
-        " Remember that rxvt-unicode has 88 colors by default; enable this only if
-        " you are using the 256-color patch
+        " Remember that rxvt-unicode has 88 colors by default; enable this 
+        " only if you are using the 256-color patch
         if &term == 'rxvt-unicode'
             set t_Co=256
         endif
@@ -72,32 +76,51 @@ if version >= 700
 
     "------ Text editing and searching behavior ------"
 
-    set hlsearch                            " turn on highlighting for searched expressions
+    set hlsearch                            " turn on highlighting for searched 
+                                            "  expressions
     set incsearch                           " highlight as we search however
-    set matchtime=5                         " blink matching chars for .x seconds
-    set mouse=a                             " try to use a mouse in the console (wimp!)
+    set matchtime=5                         " blink matching chars for .x 
+                                            "  seconds
+    set mouse=a                             " try to use a mouse in the console 
+                                            "  (wimp!)
     set ignorecase                          " set case insensitivity
     set smartcase                           " unless there's a capital letter
     set completeopt=menu,longest,preview    " more autocomplete <Ctrl>-P options
     set nostartofline                       " leave my cursor position alone!
-    set backspace=2                         " equiv to :set backspace=indent,eol,start
+    set backspace=2                         " equiv to 
+                                            "  :set backspace=indent,eol,start
+
     set textwidth=80                        " we like 80 columns
+    if exists("&colorcolumn")
+        set colorcolumn=+1                  " highlight the next column
+    endif
+    " Highlight text after column specified in textwidth
+    if has("autocmd")
+        autocmd BufWinEnter * call matchadd('ErrorMsg', '\%>' . &l:textwidth . 'v.\+', -1)
+    endif
+
     set showmatch                           " show matching brackets
     set formatoptions=tcrql                 " t - autowrap to textwidth
                                             " c - autowrap comments to textwidth
-                                            " r - autoinsert comment leader with <Enter>
-                                            " q - allow formatting of comments with :gq
-                                            " l - don't format already long lines
+                                            " r - autoinsert comment leader 
+                                            "  with <Enter>
+                                            " q - allow formatting of comments 
+                                            "  with :gq
+                                            " l - don't format already long 
+                                            "  lines
 
     "------ Indents and tabs ------"
 
-    set autoindent                  " set the cursor at same indent as line above
+    set autoindent                  " set the cursor at same indent as line 
+                                    "  above
     set smartindent                 " try to be smart about indenting (C-style)
     set expandtab                   " expand <Tab>s with spaces; death to tabs!
     set shiftwidth=4                " spaces for each step of (auto)indent
-    set softtabstop=4               " set virtual tab stop (compat for 8-wide tabs)
+    set softtabstop=4               " set virtual tab stop (compat for 8-wide 
+                                    "  tabs)
     set tabstop=8                   " for proper display of files with tabs
-    set shiftround                  " always round indents to multiple of shiftwidth
+    set shiftround                  " always round indents to multiple of 
+                                    "  shiftwidth
     set copyindent                  " use existing indents for new indents
     set preserveindent              " save as much indent structure as possible
     filetype plugin indent on       " load filetype plugins and indent settings
