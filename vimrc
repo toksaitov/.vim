@@ -39,6 +39,8 @@ if version >= 700
     set wildmode=list:longest       " set wildmenu to list choice
     set hidden                      " hides buffers instead of closing them
     set spell spelllang=en_us       " turns on spell checking
+    set iskeyword+="_"              " word delimiters
+    set spellsuggest=best,10        " show only 10 spell suggestions
 
     if has('syntax')
         syntax on
