@@ -96,10 +96,6 @@ if version >= 700
     if exists("&colorcolumn")
         set colorcolumn=+1                  " highlight the next column
     endif
-    " Highlight text after column specified in textwidth
-    if has("autocmd")
-        autocmd BufWinEnter * call matchadd('ErrorMsg', '\%>' . &l:textwidth . 'v.\+', -1)
-    endif
 
     set showmatch                           " show matching brackets
     set formatoptions=tcrql                 " t - autowrap to textwidth
