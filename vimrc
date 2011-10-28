@@ -38,7 +38,6 @@ if version >= 700
     set wildmenu                    " turn on wild menu :e <Tab>
     set wildmode=list:longest       " set wildmenu to list choice
     set hidden                      " hides buffers instead of closing them
-    set spell spelllang=en_us       " turns on spell checking
     set iskeyword+="_"              " word delimiters
     set spellsuggest=best,10        " show only 10 spell suggestions
 
@@ -141,6 +140,8 @@ if version >= 700
         " JavaScript
         autocmd BufRead,BufNewFile *.json setfiletype javascript
         autocmd FileType javascript setlocal expandtab shiftwidth=2 tabstop=2 softtabstop=2
+
+        autocmd BufNewFile,BufReadPost *.coffee setlocal expandtab shiftwidth=2 tabstop=2 softtabstop=2
     endif
 
     let javascript_enable_domhtmlcss=1
