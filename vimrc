@@ -1,4 +1,4 @@
-" Credits goes to +guns+ 
+" Credits goes to +guns+
 " http://stackoverflow.com/questions/1636771/post-your-vim-config/1639391#1639391
 
 if version >= 700
@@ -10,18 +10,17 @@ if version >= 700
         autocmd!
     endif
 
-    " Now it's possible to unzip/untar/svn-checkout/git-clone plugins to their 
+    " Now it's possible to unzip/untar/svn-checkout/git-clone plugins to their
     "  own private directories in .vim/bundle
-    call pathogen#runtime_append_all_bundles()
-    call pathogen#helptags()
+    call pathogen#infect()
 
     set nocompatible                " break away from old vi compatibility
     set fileformats=unix,dos,mac    " support all three newline formats
     set viminfo=                    " don't use or save viminfo files
 
-    "------ Console UI & Text display ------"
+    "------ Console UI & Text Display & Vim Behavior ------"
 
-    set cmdheight=1                 " explicitly set the height of the command 
+    set cmdheight=1                 " explicitly set the height of the command
                                     "  line
     set showcmd                     " show (partial) command in status line.
     set number                      " show line numbers
@@ -43,7 +42,7 @@ if version >= 700
 
     if has('syntax')
         syntax on
-        " Remember that rxvt-unicode has 88 colors by default; enable this 
+        " Remember that rxvt-unicode has 88 colors by default; enable this
         " only if you are using the 256-color patch
         if &term == 'rxvt-unicode'
             set t_Co=256
@@ -61,34 +60,18 @@ if version >= 700
     " Show EOL type and last modified timestamp, right after the filename
     set statusline=%<%F%h%m%r\ [%{&ff}]\ (%{strftime(\"%H:%M\ %d/%m/%Y\",getftime(expand(\"%:p\")))})%=%l,%c%V\ %P
 
-    "------ Git tweaks ------"
-    " Only do this part when compiled with support for autocommands.
-    if has("autocmd")
-        " Remember the positions in files with some git-specific exceptions"
-        autocmd BufReadPost *
-        \ if line("'\"") > 0 && line("'\"") <= line("$")
-        \           && expand("%") !~ "COMMIT_EDITMSG"
-        \           && expand("%") !~ "ADD_EDIT.patch"
-        \           && expand("%") !~ "addp-hunk-edit.diff"
-        \           && expand("%") !~ "git-rebase-todo" |
-        \   exe "normal g`\"" |
-        \ endif
-    endif
-
-    "------ Text editing and searching behavior ------"
-
-    set hlsearch                            " turn on highlighting for searched 
+    set hlsearch                            " turn on highlighting for searched
                                             "  expressions
     set incsearch                           " highlight as we search however
-    set matchtime=5                         " blink matching chars for .x 
+    set matchtime=5                         " blink matching chars for .x
                                             "  seconds
-    set mouse=a                             " try to use a mouse in the console 
+    set mouse=a                             " try to use a mouse in the console
                                             "  (wimp!)
     set ignorecase                          " set case insensitivity
     set smartcase                           " unless there's a capital letter
     set completeopt=menu,longest,preview    " more autocomplete <Ctrl>-P options
     set nostartofline                       " leave my cursor position alone!
-    set backspace=2                         " equiv to 
+    set backspace=2                         " equiv to
                                             "  :set backspace=indent,eol,start
 
     set textwidth=80                        " we like 80 columns
@@ -99,35 +82,35 @@ if version >= 700
     set showmatch                           " show matching brackets
     set formatoptions=tcrql                 " t - autowrap to textwidth
                                             " c - autowrap comments to textwidth
-                                            " r - autoinsert comment leader 
+                                            " r - autoinsert comment leader
                                             "  with <Enter>
-                                            " q - allow formatting of comments 
+                                            " q - allow formatting of comments
                                             "  with :gq
-                                            " l - don't format already long 
+                                            " l - don't format already long
                                             "  lines
 
-    "------ Indents and tabs ------"
+    "------ Indentation & Tabs ------"
 
-    set autoindent                  " set the cursor at same indent as line 
+    set autoindent                  " set the cursor at same indent as line
                                     "  above
+
     set smartindent                 " try to be smart about indenting (C-style)
     set expandtab                   " expand <Tab>s with spaces; death to tabs!
     set shiftwidth=4                " spaces for each step of (auto)indent
-    set softtabstop=4               " set virtual tab stop (compat for 8-wide 
+    set softtabstop=4               " set virtual tab stop (compat for 8-wide
                                     "  tabs)
+
     set tabstop=8                   " for proper display of files with tabs
-    set shiftround                  " always round indents to multiple of 
+    set shiftround                  " always round indents to multiple of
                                     "  shiftwidth
+
     set copyindent                  " use existing indents for new indents
     set preserveindent              " save as much indent structure as possible
     filetype plugin indent on       " load filetype plugins and indent settings
 
-    "------ Filetypes ------"
+    "------ File Types ------"
 
     if has("autocmd")
-        " Lisp
-        autocmd Filetype lisp,scheme setlocal equalprg=~/.vim/bin/lispindent.lisp expandtab shiftwidth=2 tabstop=8 softtabstop=2
-
         " Ruby
         autocmd FileType ruby setlocal expandtab shiftwidth=2 tabstop=2 softtabstop=2
 
@@ -141,16 +124,13 @@ if version >= 700
         autocmd BufRead,BufNewFile *.json setfiletype javascript
         autocmd FileType javascript setlocal expandtab shiftwidth=2 tabstop=2 softtabstop=2
 
+        " CoffeeScript
         autocmd BufNewFile,BufReadPost *.coffee setlocal expandtab shiftwidth=2 tabstop=2 softtabstop=2
     endif
 
     let javascript_enable_domhtmlcss=1
 
-    "------ Key remap --------"
-
-    " Quickly edit/reload the vimrc file
-    nmap <silent> <leader>ev :e $MYVIMRC<CR>
-    nmap <silent> <leader>sv :so $MYVIMRC<CR>
+    "------ Key Remapping --------"
 
     " Clear current search highlight
     nmap <silent> ./ :nohlsearch<CR>
@@ -165,3 +145,4 @@ if version >= 700
     command Tree NERDTreeToggle
 
 endif " version >= 700
+
