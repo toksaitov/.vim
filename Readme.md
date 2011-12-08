@@ -32,6 +32,8 @@ Vim Configuration Files
 
 * [Jade Template Engine Support](http://github.com/digitaltoad/vim-jade)
 
+* [Syntax Highlighting for Stylus](http://github.com/wavded/vim-stylus)
+
 * [Runtime Files for Haml, Sass, SCSS](http://github.com/tpope/vim-haml)
 
 #### Color Scheme
